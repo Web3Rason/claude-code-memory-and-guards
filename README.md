@@ -83,7 +83,7 @@ Requires Python 3.9+ and no third-party packages. The tests need `pytest`.
 python -m pytest -q
 ```
 
-The 36 black-box tests feed each script the same JSON Claude Code sends to hooks and check the exit codes and the files written.
+The 40 black-box tests feed each script the same JSON Claude Code sends to hooks and check the exit codes and the files written.
 
 ## License
 

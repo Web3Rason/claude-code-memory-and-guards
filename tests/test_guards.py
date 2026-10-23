@@ -28,6 +28,9 @@ def run(guard, payload, env=None):
 @pytest.mark.parametrize("cmd", [
     "git push origin main",
     "git -C repo push --force",
+    "git -c core.x=1 push origin main",
+    "git -C ../other reset --hard",
+    'git -C "my project" clean -f',
     "git reset --hard HEAD~1",
     "git clean -fd",
     "git branch -D feature",
@@ -43,6 +46,7 @@ def test_git_blocks(cmd):
     "git status",
     "git checkout feature-branch",
     "git restore src/app.py",
+    "git -C repo status",
     "echo hello",
 ])
 def test_git_allows(cmd):

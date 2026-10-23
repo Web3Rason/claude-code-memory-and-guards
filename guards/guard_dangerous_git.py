@@ -35,8 +35,9 @@ if not cmd:
 # (pattern, human label). `git` must be followed by the subcommand, which keeps
 # plain text that merely mentions these commands from being blocked.
 # Global options before the subcommand, including the ones that take a value
-# (`git -C <dir> push`, `git -c key=val push`), which would otherwise slip past.
-GIT = r"\bgit\s+(?:-[Cc]\s+\S+\s+|-\S+\s+)*"
+# (`git -C <dir> push`, `git -c key=val push`, quoted dirs with spaces),
+# which would otherwise slip past.
+GIT = r"""\bgit\s+(?:-[Cc]\s+(?:"[^"]*"|'[^']*'|\S+)\s+|-\S+\s+)*"""
 PATTERNS = [
     (GIT + r"push\b",                       "git push (publishes to a remote)"),
     (GIT + r"reset\s+.*--hard\b",          "git reset --hard (discards uncommitted work)"),
