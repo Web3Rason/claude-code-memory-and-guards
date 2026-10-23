@@ -1,0 +1,13 @@
+# Memory data is personal - never commit it
+*.jsonl
+*.jsonl.*
+MEMORY_EXPORT.md
+MEMORY_INDEX.md
+
+# Browser cleanup markers
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/

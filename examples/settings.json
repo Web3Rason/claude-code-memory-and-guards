@@ -1,0 +1,46 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          { "type": "command", "command": "python \"$CLAUDE_PROJECT_DIR/tools/guards/guard_dangerous_git.py\"" }
+        ]
+      },
+      {
+        "matcher": "Write|Bash|PowerShell",
+        "hooks": [
+          { "type": "command", "command": "python \"$CLAUDE_PROJECT_DIR/tools/guards/guard_injection_paranoia.py\"" }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          { "type": "command", "command": "python \"$CLAUDE_PROJECT_DIR/tools/guards/guard_stale_skill.py\"" }
+        ]
+      },
+      {
+        "matcher": "mcp__Claude_Browser__preview_start|mcp__Claude_Browser__navigate",
+        "hooks": [
+          { "type": "command", "command": "python \"$CLAUDE_PROJECT_DIR/tools/guards/guard_browser_preview.py\"" }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "mcp__Claude_Browser__preview_start|mcp__Claude_Browser__navigate|mcp__Claude_Browser__tabs_create",
+        "hooks": [
+          { "type": "command", "command": "python \"$CLAUDE_PROJECT_DIR/tools/guards/guard_browser_cleanup.py\"" }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          { "type": "command", "command": "python \"$CLAUDE_PROJECT_DIR/tools/memory/auto_save.py\"" },
+          { "type": "command", "command": "python \"$CLAUDE_PROJECT_DIR/tools/guards/guard_browser_cleanup.py\"" }
+        ]
+      }
+    ]
+  }
+}
